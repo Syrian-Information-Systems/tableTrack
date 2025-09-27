@@ -8,6 +8,12 @@ services:
       - ./:/var/www/html
       - ./php-local.ini:/usr/local/etc/php/conf.d/local.ini
     working_dir: /var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=tracktable
+      - DB_USERNAME=ibrahim
+      - DB_PASSWORD=ibrahim2003
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -36,7 +42,7 @@ services:
       MYSQL_USER: ibrahim
       MYSQL_PASSWORD: ibrahim2003
     ports:
-      - "3307:3306" # so you can access MySQL from your host if needed
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
 
