@@ -14,11 +14,11 @@ services:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
-  web:
+    web:
     image: nginx:stable
     container_name: laravel_web
-     ports:
-       - "8080:80"
+    ports:
+      - "8080:80"
     volumes:
       - ./:/var/www/html:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
