@@ -16,7 +16,6 @@ services:
 
     web:
     image: nginx:stable
-    container_name: laravel_web
     ports:
       - "8080:80"
     volumes:
