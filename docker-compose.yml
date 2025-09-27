@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   app:
     build:
@@ -8,10 +6,12 @@ services:
     container_name: laravel_app
     volumes:
       - ./:/var/www/html
-      - ./php-local.ini:/usr/local/etc/php/conf.d/local.ini   # optional PHP tweaks
+      - ./php-local.ini:/usr/local/etc/php/conf.d/local.ini
     working_dir: /var/www/html
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      - db
     restart: unless-stopped
 
   web:
@@ -25,3 +25,20 @@ services:
     depends_on:
       - app
     restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: laravel_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: tracktable
+      MYSQL_USER: ibrahim
+      MYSQL_PASSWORD: ibrahim2003
+    ports:
+      - "3307:3306" # so you can access MySQL from your host if needed
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
